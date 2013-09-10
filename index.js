@@ -66,10 +66,12 @@ Geocoder.prototype = {
    * @param {String} loc, required
    * @param {Function} cbk, required
    * @param {Object} opts, optional
+   * @param {Object} host, optional - defaults to maps.googleapis.com
+   * @param {Object} port, optional - defaults to 80
    * @api public
    */
 
-  geocode: function ( loc, cbk, opts ) {
+  geocode: function ( loc, cbk, opts, host, port ) {
 
     if ( ! loc ) {
         return cbk( new Error( "Geocoder.geocode requires a location.") );
@@ -78,8 +80,8 @@ Geocoder.prototype = {
     var options = Hash.merge({sensor: false, address: loc}, opts || {});
 
     var params = {
-      host: 'maps.googleapis.com',
-      port: 80,
+      host: host || 'maps.googleapis.com',
+      port: port || 80,
       path: '/maps/api/geocode/json?' + querystring.stringify(options),
       headers: {}
     };
@@ -87,7 +89,7 @@ Geocoder.prototype = {
     return request( params, cbk );
   },
 
-  reverseGeocode: function ( lat, lng, cbk, opts ) {
+  reverseGeocode: function ( lat, lng, cbk, opts, host, port ) {
     if ( !lat || !lng ) {
       return cbk( new Error( "Geocoder.reverseGeocode requires a latitude and longitude." ) );
     }
@@ -95,8 +97,8 @@ Geocoder.prototype = {
     var options = Hash.merge({sensor: false, latlng: lat + ',' + lng}, opts || {});
 
     var params = {
-      host: 'maps.googleapis.com',
-      port: 80,
+      host: host || 'maps.googleapis.com',
+      port: port || 80,
       path: '/maps/api/geocode/json?' + querystring.stringify(options),
       headers: {}
     };
