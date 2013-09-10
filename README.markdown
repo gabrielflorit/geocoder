@@ -21,7 +21,7 @@ geocoder.geocode("Atlanta, GA", function ( err, data ) {
 // Geocoding - custom host and port
 geocoder.geocode("Atlanta, GA", function ( err, data ) {
   // do something with data
-}, 'localhost', 8080);
+}, {}, 'localhost', 8080);
 
 // Reverse Geocoding
 geocoder.reverseGeocode( 33.7489, -84.3789, function ( err, data ) {
